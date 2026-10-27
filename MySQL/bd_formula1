@@ -1,0 +1,158 @@
+CREATE database db_testeformula1;
+USE db_testeformula1;
+
+CREATE TABLE tb_paises (
+codigoPAIS integer not null primary key,
+nomePAIS varchar (30) not null
+);
+
+CREATE TABLE tb_equipes (
+sigla_EQP varchar (3) not null primary key,
+nome_EQP varchar (30) not null,
+cod_pais integer not null,
+foreign key (cod_pais) references tb_paises(codigoPAIS)
+);
+
+CREATE TABLE tb_piloto (
+nomePIL varchar(50) not null,
+numPIL integer not null primary key,
+cod_pais integer not null,
+sigla_equipe varchar (3)
+);
+
+CREATE TABLE tb_corridas (
+siglaGP varchar (3) not null primary key,
+nomeGP varchar (30) not null,
+cod_pais integer not null,
+qtd_voltas integer not null,
+foreign key (cod_pais) references tb_paises(codigoPAIS)
+);
+
+CREATE TABLE tb_participantes (
+sigla_GP VARCHAR(10) not null,
+num_piloto integer not null,
+posicao_largada integer not null,
+primary key (sigla_GP, num_piloto),
+foreign key (sigla_GP) references tb_corridas(siglaGP),
+foreign key (num_piloto) references tb_piloto(numPIL)
+);
+
+INSERT tb_piloto VALUES('Maycon Pedro', 67, '2', 'GAF');
+INSERT tb_piloto VALUES('Angelo Daher', 890, '2', 'GAF');
+INSERT tb_piloto VALUES('Mateus Henrique', 77, '2', 'GAF');
+INSERT tb_piloto VALUES('Rangel Nunes', 45, '2', 'GAF');
+INSERT tb_piloto VALUES('Guilherme', 7, '2', 'GAF');
+INSERT tb_piloto VALUES('Lucas Rafael', 90, '3', 'LUA');
+INSERT tb_piloto VALUES('LuisMario', 50, '3', 'LUA');
+INSERT tb_piloto VALUES('Matheus Oliveira', 30, '3', 'LUA');
+INSERT tb_piloto VALUES('João Kreiser', 22, '6', 'SOL');
+INSERT tb_piloto VALUES('Arthur Oliveira', 60, '6', 'SOL');
+
+INSERT tb_equipes VALUES('GAF', 'GAFANHOTOS', 2);
+INSERT tb_equipes VALUES('LUA', 'LUANARIANOS', 3);
+INSERT tb_equipes VALUES('SOL', 'SOLARIANOS', 6);
+
+INSERT tb_paises VALUES(2, 'Brasil');
+INSERT tb_paises VALUES(3, 'Italia');
+INSERT tb_paises VALUES(6, 'França');
+
+INSERT tb_corridas VALUES('PBR', 'GP-BRASIL', 2, 7);
+INSERT tb_corridas VALUES('PIT', 'GP-ITALIA', 3, 5);
+INSERT tb_corridas VALUES('PFR', 'GP-FRANÇA', 6, 3);
+
+INSERT tb_participantes VALUES('PBR', 67, 1);
+INSERT tb_participantes VALUES('PBR', 890, 2);
+INSERT tb_participantes VALUES('PBR', 77, 3);
+INSERT tb_participantes VALUES('PBR', 45, 4);
+INSERT tb_participantes VALUES('PBR', 7, 5);
+INSERT tb_participantes VALUES('PIT', 90, 6);
+INSERT tb_participantes VALUES('PIT', 50, 7);
+INSERT tb_participantes VALUES('PIT', 30, 8);
+INSERT tb_participantes VALUES('PFR', 22, 9);
+INSERT tb_participantes VALUES('PFR', 60, 10);
+
+SELECT * 
+FROM tb_participantes;
+
+SELECT nomePAIS
+FROM tb_paises
+WHERE nomePAIS LIKE 'B%L';
+
+SELECT cod_pais
+from tb_piloto
+WHERE cod_pais like 2;
+
+SELECT cod_pais
+from tb_piloto
+WHERE cod_pais like 3;
+
+SELECT cod_pais
+from tb_piloto
+WHERE cod_pais like 6;
+
+SELECT nomePIL
+FROM tb_piloto;
+
+SELECT nomeGP as 'Nome do GP', qtd_voltas as 'Quantidade de voltas'
+from tb_corridas;
+
+SELECT tb_piloto.nomePIL, tb_paises.nomePAIS
+FROM tb_piloto, tb_paises
+WHERE tb_piloto.cod_pais = tb_paises.codigoPAIS;
+
+ALTER TABLE tb_piloto
+ADD COLUMN salario DECIMAL(10,2);
+
+UPDATE tb_piloto
+SET salario = 75000
+WHERE numPIL = 1;
+
+UPDATE tb_piloto
+SET salario = 45000
+WHERE numPIL = 2;
+
+UPDATE tb_piloto
+SET salario = 77700
+WHERE numPIL = 3;
+
+UPDATE tb_piloto
+SET salario = 60000
+WHERE numPIL = 4;
+
+UPDATE tb_piloto
+SET salario = 70000
+WHERE numPIL = 5;
+
+UPDATE tb_piloto
+SET salario = 30000
+WHERE numPIL = 6;
+
+UPDATE tb_piloto
+SET salario = 13000
+WHERE numPIL = 7;
+
+UPDATE tb_piloto
+SET salario = 40000
+WHERE numPIL = 8;
+
+UPDATE tb_piloto
+SET salario = 80000
+WHERE numPIL = 9;
+
+UPDATE tb_piloto
+SET salario = 90000
+WHERE numPIL = 10;
+
+SELECT nomePIL
+FROM tb_piloto
+WHERE salario between 70000 and 100000;
+
+SELECT nomePAIS, AVG(salario) AS MediaSalario
+FROM tb_piloto
+INNER JOIN tb_paises
+ON tb_piloto.cod_pais = tb_paises.codigoPAIS
+GROUP BY nomePAIS;
+
+SELECT salario
+FROM tb_pilotos
+ORDER BY salario ASC;
