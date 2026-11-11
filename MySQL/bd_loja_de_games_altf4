@@ -458,3 +458,27 @@ SELECT
     preco_jogo * quantidade_estoque AS valor_estoque,
     preco_jogo / 2 AS metade_do_preco
 FROM jogo;
+
+
+    Apresentação 
+O projeto ALT F4 propõe um banco de dados para uma loja especializada na venda de jogos eletrônicos. A ideia é reunir as principais informações do estabelecimento em um só lugar, facilitando o atendimento e a organização das atividades comerciais. 
+
+ 
+
+    Quem o sistema atende 
+ O sistema é voltado aos funcionários e responsáveis pela loja, que precisam consultar produtos, registrar compras e acompanhar pagamentos. Os clientes são o público atendido e ficam registrados para que suas compras possam ser consultadas posteriormente. 
+
+ 
+
+    Como funciona na prática 
+ A loja mantém os cadastros de clientes, funcionários e jogos. Quando ocorre uma compra, o funcionário localiza o cliente, seleciona os jogos, informa as quantidades e registra a venda e o pagamento. A operação fica guardada no histórico. O sistema também verifica a disponibilidade antes de registrar um item e atualiza o estoque após a inclusão da venda. 
+
+ 
+
+   Organização e benefícios  
+O catálogo reúne nome, preço, ano de lançamento, categoria, plataforma e quantidade em estoque. Isso facilita a localização dos títulos e a consulta de disponibilidade. O histórico permite acompanhar vendas, pagamentos, valores movimentados e compras realizadas por cada cliente. Entre as facilidades esperadas estão a localização rápida de produtos e clientes, o acompanhamento do estoque, o registro organizado das vendas, a consulta aos pagamentos e a visualização de informações comerciais.  
+
+ 
+
+   Estrutura do projeto 
+ O banco reúne oito conjuntos de informações: Cliente, Funcionário, Plataforma, Categoria, Jogo, Venda, Item_venda e Pagamento. O trabalho inclui os modelos conceitual e lógico, o script SQL, dados de exemplo, consultas e recursos de apoio ao controle do estoque. 
